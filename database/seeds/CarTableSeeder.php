@@ -11,11 +11,29 @@ class CarTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 20; $i++) {
-            Car::create([
+        \App\Car::truncate();
+        $cars = [
+            [
+                'name' => 'Spacio',
+                'model' => 'N12',
+                'yom' => '2000'
+            ],
 
+            [
+                'name' => 'Alion',
+                'model' => 'N12',
+                'yom' => '2000'
+            ],
 
-            ]);
+            [
+                'name' => 'Hilux',
+                'model' => 'N12',
+                'yom' => '2000'
+            ]
+        ];
+
+        foreach ($cars as $car) {
+            \App\Car::create($car);
         }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\Http\Requests\StoreCarRequest;
 use App\Purchase;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,8 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $cars = Car::all();
+        return view('purchases.create', compact('cars'));
     }
 
     /**
@@ -33,9 +36,19 @@ class PurchaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        //
+        $purchase = new Purchase();
+        $purchase->buyer = $request->buyer;
+        $purchase->car_id = $request->car;
+        $purchase->amount = $request->amount;
+
+        if (!$purchase->save()) {
+            return back()->withErrors('Some thing went wrong, try again');
+        }
+
+        return redirect('dashboard')->with('message', 'Successfully made a new purchase');
+
     }
 
     /**

@@ -18,7 +18,6 @@ class CreateCarsTable extends Migration
             $table->string('name');
             $table->string('model');
             $table->string('yom');
-            $table->integer('car_type_id');
             $table->timestamps();
         });
     }
